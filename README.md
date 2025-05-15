@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Cubes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #0a192f;
+            padding: 20px;
+            color: white;
+        }
+        h1 {
+            color: #e6f1ff;
+            margin-bottom: 5px;
+        }
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input {
+            padding: 8px;
+            width: 50px;
+            text-align: center;
+            background-color: #172a45;
+            border: 1px solid #303f60;
+            color: white;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #64ffda;
+            color: #0a192f;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #52e3c2;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .cube {
+            width: 60px;
+            height: 60px;
+            background-color: #172a45;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .cube.active {
+            background-color: #64ffda;
+            transform: scale(1.05);
+        }
+        .promo-btn {
+            margin-top: 30px;
+            background-color: #ff5722;
+            font-size: 18px;
+        }
+        .promo-btn:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <h1>Signal Cubes</h1>
+    <div class="controls">
+        <button id="signalBtn">Get a signal</button>
+        <span>💣</span> <!-- Заменили # на 💣 -->
+        <input type="number" id="countInput" min="1" max="25" value="1">
+    </div>
+    <div class="board" id="board"></div>
+    <button class="promo-btn" id="promoBtn">Go to 1win🚀</button>
+
+    <script>
+        const board = document.getElementById('board');
+        const signalBtn = document.getElementById('signalBtn');
+        const countInput = document.getElementById('countInput');
+        const promoBtn = document.getElementById('promoBtn');
+        
+        // Создаем 25 кубиков (5x5) без цифр
+        function createBoard() {
+            board.innerHTML = '';
+            for (let i = 0; i < 25; i++) {
+                const cube = document.createElement('div');
+                cube.className = 'cube';
+                board.appendChild(cube);
+            }
+        }
+        
+        // Меняем цвет кубиков
+        function changeCubes() {
+            const count = parseInt(countInput.value) || 1;
+            const cubes = document.querySelectorAll('.cube');
+            
+            cubes.forEach(cube => cube.classList.remove('active'));
+            
+            const shuffled = Array.from(cubes).sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, Math.min(count, 25));
+            
+            selected.forEach((cube, index) => {
+                setTimeout(() => {
+                    cube.classList.add('active');
+                }, index * 50);
+            });
+        }
+        
+        // Переход на внешний сайт
+        promoBtn.addEventListener('click', () => {
+            window.location.href = "https://1wbfqv.life/v3/2158/1win-mines?p=12bz";
+        });
+        
+        // Инициализация
+        createBoard();
+        signalBtn.addEventListener('click', changeCubes);
+    </script>
+</body>
+</html>
